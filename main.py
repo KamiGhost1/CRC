@@ -3,22 +3,39 @@ import random
 
 def init():
     """Initializing the input parameters"""
-    g_x = input("Enter the g(x): ")  # Generating polynomial
-    g_x = bin(int(g_x, 2))
+    gx = input("Enter the g(x): ")  # Generating polynomial
+    gx = bin(int(gx, 2))
     epsilon = input(
         "Enter the epsilon: ")  # accuracy ε with which the program estimates the probability of decoding error
     l = input("Enter the l: ")  # The count of information transmitted symbols from messages m
     l = int(l)
-    r = len(g_x) - 2
+    r = len(gx) - 3
     print(r)
-    k = random.randint(5, 100)  # Message length
-    m = bin(random.getrandbits(k))  # Message
-    return {'g(x)': g_x, 'epsilon': epsilon, 'l': l, 'k': k, 'm': m, 'r': r}
+    m = bin(l)  # Message
+    return {'g(x)': gx, 'epsilon': epsilon, 'l': l, 'm': m, 'r': r, 'm(x)': None, 'a(x)': None, 'b(x)': None,
+            'c(x)': None}
+
+
+def xor(mx, gx):
+    m, g = mx.split('b'), gx.split('b')
+    m, g = m[1], g[1]
+    c = list(m)
+    for i in range(len(g)):
+        if g[i] == "1" and m[i] == "1":
+            c[i] = "0"
+
+        if (g[i] == "1" and m[i] == "0") or (g[i] == "0" and m[i] == "1"):
+            c[i] = "1"
+    c = ''.join(c)
+    c = c.split('0', 1)
+    print(c, m, g)
 
 
 def main():
     """Main program function"""
     coding_data = init()
+    coding_data['m(x)'] = coding_data['m'] + '0' * coding_data['r']
+    xor(coding_data['m(x)'], coding_data['g(x)'])
     print(coding_data)
 
 
