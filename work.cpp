@@ -28,7 +28,9 @@ int testParam(int C, char **V){
       cin>>dividend;
       cout<<"Enter divisor ";
       cin>>divisor;
-
+      dividend*=pow(2,(deg(divisor)-1));
+      char *div = division(dividend,divisor);
+      cout<<div<<endl;
     }
     if(!strcmp(V[1],"-start")){
       int epsilon,p;
@@ -39,9 +41,45 @@ int testParam(int C, char **V){
 
 char *division(int dividend, int divisor){
   if(dividend < divisor){
-    return NULL;
+    return toBin(dividend);
   };
-  return NULL;
+  int size = deg(dividend);
+  if(dividend==divisor){
+    return nullStr(deg(dividend));
+  }
+  string div = toBin(dividend);
+  string dis = toBin(divisor);
+  char *m = strToChar(div);
+  #ifdef debag
+  cout<<div<<endl;
+  cout<<dis<<endl;
+  #endif
+  int size_j,key;
+  key = 0;
+  size -= deg(divisor)-1;
+  for(int i =0;i<size;i++){
+    size_j=i+deg(divisor);
+    if(m[i]=='0'){
+      continue;
+    }else{
+      for(int j=i;j<size_j;j++){
+        if(m[j]==dis[key]){
+          m[j]='0';
+        }else{
+          m[j]='1';
+        }
+        key++;
+      }
+      key=0;
+    }
+    #ifdef debag
+    cout<<i<<"  m:"<<m<<endl;
+    #endif
+    if(toDec(m)==0){
+      return nullStr(deg(dividend));
+    }
+  }
+  return strToChar(m);
 }
 
 char *toBin(int num){
@@ -74,11 +112,37 @@ int toDec(char *bin){
   int dec = 0;
   int j = size-1;
   for(int i=0;i<size;i++){
-    cout<<"bin: "<<bin[i]<<"  j:"<<j<<endl;
     if(bin[i]=='1'){
       dec += pow(2,j);
     }
     j--;
   }
   return dec;
+}
+
+int toDecStr(string bin){
+  int size = bin.length();
+  int dec = 0;
+  int j = size-1;
+  for(int i=0;i<size;i++){
+    if(bin[i]=='1'){
+      dec += pow(2,j);
+    }
+    j--;
+  }
+  return dec;
+}
+char *nullStr(int size){
+  char *msg = new char[size];
+  for(int i=0;i<size;i++){
+    msg[i]='0';
+  }
+  return msg;
+}
+char *strToChar(string m){
+  char *mes = new char[m.length()];
+  for(int i=0;i<m.length();i++){
+    mes[i]=m[i];
+  }
+  return mes;
 }
