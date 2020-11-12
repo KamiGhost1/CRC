@@ -29,9 +29,8 @@ int testParam(int C, char **V){
       cout<<"Enter divisor ";
       cin>>divisor;
       dividend*=pow(2,(deg(divisor)-1));
-      char *div = division(dividend,divisor);
+      int div = division(dividend,divisor);
       cout<<div<<endl;
-      delete(div);
     }
     if(!strcmp(V[1],"--err")){
       int n,p,i;
@@ -41,8 +40,9 @@ int testParam(int C, char **V){
       cin>>p;
       cout<<"Enter i ";
       cin>>i;
+      srand(time(0));
       for(int j = 0;j<i;j++){
-        cout<<generateErr(n,p,0)<<endl;
+        cout<<generateErr(n,p)<<endl;
       }
     }
     if(!strcmp(V[1],"--msg")){
@@ -52,11 +52,12 @@ int testParam(int C, char **V){
       cout<<generateM(d)<<endl;
     }
     if(!strcmp(V[1],"--start")){
+      srand(time(0));
       int p,n,nE,l;
       float epsilon;
       string gx;
       int msg,ax,bx,e,Gx,Ner;
-      string Msg,Ax,Bx,Er;
+      char *Ax;
       long int tick =0;
       cout<<"Enter epsilon: ";
       cin>>epsilon;
@@ -71,54 +72,52 @@ int testParam(int C, char **V){
       nE = 0;
       Ner = 0;
       Gx = toDecStr(gx);
-      for(int i = 0;i<n;i++){
-        msg = generateM(l);
-        msg*=pow(2,(deg(Gx)-1));
-        Ax = division(msg,Gx);
-        ax = toDecStr(Ax);
-        msg = msg^ax;
-        Msg = toBin(msg);
-        Er = generateErr(Ax.length(),p,tick);
-        tick+=tickSTEP;
-        e = toDecStr(Er);
-        bx = msg^e;
-        Bx = division(bx,Gx);
-        bx = toDecStr(Bx);
-        if(bx == 0 && e > 0){
-          nE++;
+      int err_size;
+      for(int j = l-lSTEP;j<=l+(lSTEP*10);j++){
+        err_size = j+deg(Gx)-1;
+        for(int i = 0;i<n;i++){
+          msg = generateM(j);
+          msg*=pow(2,(deg(Gx)-1));
+          ax = division(msg,Gx);
+          msg = msg^ax;
+          e = generateErr(err_size,p);
+          bx = msg^e;
+          bx = division(bx,Gx);
+          if(bx == 0 && e > 0){
+            nE++;
+          }
+          if (bx != 0){
+            Ner++;
+          }
+          #ifdef main_debag
+          cout<<'\n'<<"debag info " <<i<<'\n'<<endl;
+          cout<<"Gx:"<<Gx<<endl;
+          cout<<"ax:"<<ax<<endl;
+          cout<<"e:"<<e<<endl;
+          cout<<"bx:"<<bx<<endl;
+          cout<<'\n'<<"end"<<'\n'<<endl;
+          #endif
         }
-        if (bx != 0){
-          Ner++;
+        cout<<nE<<";"<<p<<";"<<j<<endl;
+        nE = 0;
+        Ner = 0;
+        p+=pSTEP;
+        if(p>100){
+          break;
         }
-        #ifdef main_debag
-        cout<<'\n'<<"debag info " <<i<<'\n'<<endl;
-        // cout<<"Gx:"<<Gx<<endl;
-        // cout<<"msg:"<<msg<<endl;
-        // cout<<"Msg:"<<Msg<<endl;
-        // cout<<"Ax:"<<Ax<<endl;
-        // cout<<"ax:"<<ax<<endl;
-        cout<<"Er:"<<Er<<endl;
-        // cout<<"e:"<<e<<endl;
-        // cout<<"bx:"<<bx<<endl;
-        // cout<<"Bx:"<<Bx<<endl;
-        // cout<<"ticker:"<<tick<<endl;
-        cout<<'\n'<<"end"<<'\n'<<endl;
-        #endif
       }
-      cout<<"Ne: "<<nE<<endl;
-      cout<<"Ner: "<<Ner<<endl;
     }
   }
   exit(1);
 }
 
-char *division(int dividend, int divisor){
+int division(int dividend, int divisor){
   if(dividend < divisor){
-    return toBin(dividend);
+    return dividend;
   };
   int size = deg(dividend);
   if(dividend==divisor){
-    return nullStr(deg(dividend));
+    return dividend;
   }
   string div = toBin(dividend);
   string dis = toBin(divisor);
@@ -149,29 +148,39 @@ char *division(int dividend, int divisor){
     cout<<i<<"  m:"<<m<<endl;
     #endif
     if(toDec(m)==0){
-      return nullStr(deg(dividend));
+      delete(m);
+      return 0;
     }
   }
-  return strToChar(m);
+  dividend = toDec(m);
+  delete(m);
+  return dividend;
 }
 
-int generateErr(int n,int a,time_t tick){
-  srand( time(NULL) );
-  int rand_num = rand() % (int)(pow(2,n));
+int generateErr(int n,int p){
+  int rand_num;
+  char *e = new char[n];
+  for(int i = 0;i<n;i++){
+    rand_num = 1+rand()%100;
+    if(rand_num<=p){
+      e[i]='1';
+    }else{
+      e[i]='0';
+    }
+  }
+  rand_num = toDec(e);
+  delete(e);
   return rand_num;
 }
 
 int generateM(int d){
-  srand( time(0) );
   int m;
   do{
     m = 1+rand()%MAX_MSG;
-    if(m==0){
-      continue;
-    }
   }while(deg(m)>d);
   return m;
 }
+
 char *toBin(int num){
   int mod,div,size;
   size = deg(num);
