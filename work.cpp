@@ -102,7 +102,7 @@ int testParam(int C, char **V){
           #endif
         }
         Pe = ((float)nE/n);
-        cout<<nE<<"\t"<<Pe<<"\t"<<p<<"\t"<<j<<endl;
+        cout<<nE<<";"<<Pe<<";"<<p<<";"<<j<<endl;
         nE = 0;
         Ner = 0;
         p+=pSTEP;
