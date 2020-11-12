@@ -32,6 +32,9 @@ int testParam(int C, char **V){
       int div = division(dividend,divisor);
       cout<<div<<endl;
     }
+    if(!strcmp(V[1],"--test")){
+      cout<<((float)5/10)<<endl;
+    }
     if(!strcmp(V[1],"--err")){
       int n,p,i;
       cout<<"Enter n ";
@@ -54,7 +57,7 @@ int testParam(int C, char **V){
     if(!strcmp(V[1],"--start")){
       srand(time(0));
       int p,n,nE,l;
-      float epsilon;
+      float epsilon,Pe;
       string gx;
       int msg,ax,bx,e,Gx,Ner;
       char *Ax;
@@ -98,7 +101,8 @@ int testParam(int C, char **V){
           cout<<'\n'<<"end"<<'\n'<<endl;
           #endif
         }
-        cout<<nE<<";"<<p<<";"<<j<<endl;
+        Pe = ((float)nE/n);
+        cout<<nE<<";"<<Pe<<";"<<p<<";"<<j<<endl;
         nE = 0;
         Ner = 0;
         p+=pSTEP;
