@@ -3,11 +3,14 @@
 #include <cmath>
 #include <stdlib.h>
 
+
+//#define once_loop
 // #define debag true;
 // #define main_debag true;
 #define pSTEP 5
-#define lSTEP 2
+#define lSTEP 1
 #define MAX_MSG 1024
+#define MAX_L 10
 
 using namespace std;
 
@@ -18,6 +21,6 @@ int division(int dividend, int devisor);
 char *toBin(int num);
 int deg(int num);
 int toDec(char *bin);
-int toDecStr(string bin);
+int toDec(string bin);
 char *nullStr(int size);
 char *strToChar(string m);

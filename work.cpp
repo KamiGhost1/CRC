@@ -31,9 +31,11 @@ int testParam(int C, char **V){
       dividend*=pow(2,(deg(divisor)-1));
       int div = division(dividend,divisor);
       cout<<div<<endl;
+      exit(0);
     }
     if(!strcmp(V[1],"--test")){
       cout<<((float)5/10)<<endl;
+      exit(0);
     }
     if(!strcmp(V[1],"--err")){
       int n,p,i;
@@ -47,6 +49,7 @@ int testParam(int C, char **V){
       for(int j = 0;j<i;j++){
         cout<<generateErr(n,p)<<endl;
       }
+      exit(0);
     }
     if(!strcmp(V[1],"--msg")){
       int d;
@@ -55,63 +58,18 @@ int testParam(int C, char **V){
       cout<<generateM(d)<<endl;
     }
     if(!strcmp(V[1],"--start")){
-      srand(time(0));
-      int p,n,nE,l;
-      float epsilon,Pe;
-      string gx;
-      int msg,ax,bx,e,Gx,Ner;
-      char *Ax;
-      long int tick =0;
-      cout<<"Enter epsilon: ";
-      cin>>epsilon;
-      cout<<"Enter p: ";
-      cin>>p;
-      cout<<"Enter gx(*1101): ";
-      cin>>gx;
-      cout<<"Enter l: ";
-      cin>>l;
-      n=int(9/(4*pow(epsilon,2)))+1;
-      cout<<"N:"<<n<<endl;
-      nE = 0;
-      Ner = 0;
-      Gx = toDecStr(gx);
-      int err_size;
-      for(int j = l-lSTEP;j<=l+(lSTEP*10);j++){
-        err_size = j+deg(Gx)-1;
-        for(int i = 0;i<n;i++){
-          msg = generateM(j);
-          msg*=pow(2,(deg(Gx)-1));
-          ax = division(msg,Gx);
-          msg = msg^ax;
-          e = generateErr(err_size,p);
-          bx = msg^e;
-          bx = division(bx,Gx);
-          if(bx == 0 && e > 0){
-            nE++;
-          }
-          if (bx != 0){
-            Ner++;
-          }
-          #ifdef main_debag
-          cout<<'\n'<<"debag info " <<i<<'\n'<<endl;
-          cout<<"Gx:"<<Gx<<endl;
-          cout<<"ax:"<<ax<<endl;
-          cout<<"e:"<<e<<endl;
-          cout<<"bx:"<<bx<<endl;
-          cout<<'\n'<<"end"<<'\n'<<endl;
-          #endif
-        }
-        Pe = ((float)nE/n);
-        cout<<nE<<";"<<Pe<<";"<<p<<";"<<j<<endl;
-        nE = 0;
-        Ner = 0;
-        p+=pSTEP;
-        if(p>100){
-          break;
-        }
-      }
+        return 1;
     }
   }
+  if(C==3){
+      if(!strcmp(V[1],"--start") && !strcmp(V[2],"--once")){
+          return 2;
+      }
+      if(!strcmp(V[1],"--start") && !strcmp(V[2],"--only_once")){
+          return 3;
+      }
+  }
+  cout<<"unknown params, use -h"<<endl;
   exit(1);
 }
 
@@ -223,7 +181,7 @@ int toDec(char *bin){
   return dec;
 }
 
-int toDecStr(string bin){
+int toDec(string bin){
   int size = bin.length();
   int dec = 0;
   int j = size-1;
