@@ -114,6 +114,7 @@ void CRC::start(int mode){
                 Ner = 0;
                 p+=pSTEP;
                 if(mode == 3){
+                    cout<<vec[0].second<<"  "<<vec[0].first<<endl;
                     break;
                 }
             }
