@@ -156,7 +156,7 @@ int generateErr(int n,int p){
   return Ve;
 }
 
-int generateErrModern(int n,int p, int msg){
+int generateErr(int n,int p, int msg){
     double rand_num;
     int Ve;
     char *e = new char[n];

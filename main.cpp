@@ -89,7 +89,7 @@ void CRC::start(int mode, int C){
                     ax = division(msg,Gx);
                     msg = msg^ax;
                     if(C==4){
-                        e = generateErrModern(err_size,p,msg);
+                        e = generateErr(err_size,p,msg);
                     }else{
                         e = generateErr(err_size,p);
                     }
