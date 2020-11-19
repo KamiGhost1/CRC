@@ -66,6 +66,9 @@ int testParam(int C, char **V){
     }
   }
   if(C==3){
+      if(!strcmp(V[1],"--start") && !strcmp(V[2],"-m")){
+          return 1;
+      }
       if(!strcmp(V[1],"--start") && !strcmp(V[2],"--once")){
           return 2;
       }
