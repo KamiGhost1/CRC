@@ -10,13 +10,15 @@
 // #define debag true;
 // #define main_debag true;
 //#define per_debag
-#define pSTEP 5
+//#define err_debug
+#define pSTEP 2
 #define lSTEP 1
 #define MAX_MSG 1024
 #define MAX_L 10
 
 using namespace std;
 
+double random(double min, double max);
 int testParam(int C, char **V);
 int generateErr(int n,int p);
 int generateM(int d);

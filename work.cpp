@@ -34,8 +34,12 @@ int testParam(int C, char **V){
       exit(0);
     }
     if(!strcmp(V[1],"--test")){
-      cout<<((float)5/10)<<endl;
-      exit(0);
+        srand(time(0));
+        for(int i =0;i<10;i++){
+            cout<<random(0, MAX_MSG)/MAX_MSG<<endl;
+
+        }
+        exit(0);
     }
     if(!strcmp(V[1],"--err")){
       int n,p,i;
@@ -71,6 +75,10 @@ int testParam(int C, char **V){
   }
   cout<<"unknown params, use -h"<<endl;
   exit(1);
+}
+
+double random(double min, double max){
+    return (double)(rand())/RAND_MAX*(max - min) + min;
 }
 
 int division(int dividend, int divisor){
@@ -120,19 +128,24 @@ int division(int dividend, int divisor){
 }
 
 int generateErr(int n,int p){
-  int rand_num;
+  double rand_num;
+  int Ve;
   char *e = new char[n];
+  double PP = (double)p/100;
   for(int i = 0;i<n;i++){
-    rand_num = 1+rand()%100;
-    if(rand_num<=p){
+    rand_num = random(0,MAX_MSG)/MAX_MSG; //TODO 0-1
+    if(rand_num <= PP){
       e[i]='1';
     }else{
       e[i]='0';
     }
   }
-  rand_num = toDec(e);
+  Ve = toDec(e);
+#ifdef err_debug
+  cout<<p<<"   "<<PP<<"  "<<rand_num<<"  "<<e<<endl;
+#endif
   delete(e);
-  return rand_num;
+  return Ve;
 }
 
 int generateM(int d){

@@ -82,9 +82,9 @@ void CRC::start(int mode){
         for(int k = l;k<=MAX_L;k++){
             graph++;
             for(int j = count;j<max_count;j++){
-                err_size = j+deg(Gx)-1;
+                err_size = k+deg(Gx)-1;
                 for(int i = 0;i<n;i++){
-                    msg = generateM(l);
+                    msg = generateM(k);
                     msg*=pow(2,(deg(Gx)-1));
                     ax = division(msg,Gx);
                     msg = msg^ax;
