@@ -15,7 +15,7 @@ int testParam(int C, char **V){
       cout<< "Enter num to test toBin func"<<endl;
       int num;
       cin>>num;
-      char *bin = toBin(num);
+      char *bin = toBin(num,10);
       cout<<bin<<endl;
       num = toDec(bin);
       cout<<num<<endl;
@@ -73,6 +73,14 @@ int testParam(int C, char **V){
           return 3;
       }
   }
+    if(C==4){
+        if(!strcmp(V[1],"--start") && !strcmp(V[2],"--once") && !strcmp(V[3],"-m")){
+            return 2;
+        }
+        if(!strcmp(V[1],"--start") && !strcmp(V[2],"--only_once") && !strcmp(V[3],"-m")){
+            return 3;
+        }
+    }
   cout<<"unknown params, use -h"<<endl;
   exit(1);
 }
@@ -148,6 +156,30 @@ int generateErr(int n,int p){
   return Ve;
 }
 
+int generateErrModern(int n,int p, int msg){
+    double rand_num;
+    int Ve;
+    char *e = new char[n];
+    double PP = (double)p/100;
+    char *mg = toBin(msg,n);
+    for(int i = 0;i<n;i++){
+        rand_num = random(0,MAX_MSG)/MAX_MSG; //TODO 0-1
+        if(rand_num <= PP && mg[i]=='1'){
+//            cout<<"yep"<<endl;
+            e[i]='1';
+        }else{
+            e[i]='0';
+        }
+    }
+    Ve = toDec(e);
+#ifdef err_debug
+    cout<<p<<"   "<<PP<<"  "<<rand_num<<"  "<<e<<endl;
+#endif
+    delete(mg);
+    delete(e);
+    return Ve;
+}
+
 int generateM(int d){
   int m;
   do{
@@ -157,7 +189,7 @@ int generateM(int d){
 }
 
 char *toBin(int num){
-  int mod,div,size;
+  int mod,size;
   size = deg(num);
   char *bin = new char[size];
   int j = size -1;
@@ -172,6 +204,23 @@ char *toBin(int num){
     j--;
   }
   return bin;
+}
+
+char *toBin(int num, int length){
+    int mod;
+    char *bin = new char[length];
+    int j = length -1;
+    for(int i = 0;i<length;i++){
+        mod = num%2;
+        num = num / 2;
+        if(mod ==1){
+            bin[j]='1';
+        }else if(mod == 0){
+            bin[j]='0';
+        }
+        j--;
+    }
+    return bin;
 }
 
 

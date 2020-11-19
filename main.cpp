@@ -2,7 +2,7 @@
 
 class CRC{
 public:
-    void start(int mode);
+    void start(int mode, int C);
     void drawing();
     void write_graph();
 private:
@@ -47,7 +47,7 @@ void CRC::drawing() {
     }
 }
 
-void CRC::start(int mode){
+void CRC::start(int mode, int C){
     if(mode == 1 || mode ==2 || mode ==3){
         srand(time(0));
         cout<<"Enter epsilon: ";
@@ -88,7 +88,11 @@ void CRC::start(int mode){
                     msg*=pow(2,(deg(Gx)-1));
                     ax = division(msg,Gx);
                     msg = msg^ax;
-                    e = generateErr(err_size,p);
+                    if(C==4){
+                        e = generateErrModern(err_size,p,msg);
+                    }else{
+                        e = generateErr(err_size,p);
+                    }
                     ax = msg^e;
                     ax = division(ax,Gx);
                     if(ax == 0 && e > 0){
@@ -132,7 +136,7 @@ void CRC::start(int mode){
 int main(int argc, char **argv){
   int mode = testParam(argc, argv);
   CRC a;
-  a.start(mode);
+  a.start(mode, argc);
   if(mode == 2 || mode == 1 ){
       a.drawing();
   }
