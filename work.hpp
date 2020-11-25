@@ -31,3 +31,4 @@ int toDec(char *bin);
 int toDec(string bin);
 char *nullStr(int size);
 char *strToChar(string m);
+void wordsList(int length, int gx);

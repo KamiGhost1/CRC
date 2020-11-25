@@ -64,6 +64,16 @@ int testParam(int C, char **V){
     if(!strcmp(V[1],"--start")){
         return 1;
     }
+    if(!strcmp(V[1],"--words")){
+        int length;
+        string Gx;
+        cout<<"enter length: ";
+        cin>>length;
+        cout<<"enter gx(*1101): ";
+        cin>>Gx;
+        wordsList(length,toDec(Gx));
+        exit(0);
+    }
   }
   if(C==3){
       if(!strcmp(V[1],"--start") && !strcmp(V[2],"-m")){
@@ -93,13 +103,13 @@ double random(double min, double max){
 }
 
 int division(int dividend, int divisor){
-  if(dividend < divisor){
+  if(deg(dividend) < deg(divisor)){
     return dividend;
   };
-  int size = deg(dividend);
   if(dividend==divisor){
-    return dividend;
+    return 0;
   }
+  int size = deg(dividend);
   string div = toBin(dividend);
   string dis = toBin(divisor);
   char *m = strToChar(div);
@@ -157,6 +167,19 @@ int generateErr(int n,int p){
 #endif
   delete(e);
   return Ve;
+}
+
+void wordsList(int length, int gx){
+    int msg,cx;
+    char *mg;
+    for(int i=0;i<pow(2,length);i++){
+        msg = i*pow(2,(deg(gx)-1));
+        cx = division(msg,gx);
+        msg = msg^cx;
+        mg = toBin(msg,length+deg(gx)-1);
+        cout<<mg<<endl;
+        delete(mg);
+    }
 }
 
 int generateErr(int n,int p, int msg){
