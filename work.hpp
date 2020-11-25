@@ -11,7 +11,7 @@
 // #define main_debag true;
 //#define per_debag
 //#define err_debug
-#define pSTEP 2
+#define pSTEP 1
 #define lSTEP 1
 #define MAX_MSG 1024
 #define MAX_L 10
