@@ -13,6 +13,8 @@ public:
     void start(int mode, int C, char **V);
     void drawing();
     void write_graph();
+    void expectedValue(char *my, char *check);
+    void loadingData(char *my, char *check);
 private:
     int p,n,nE,l;
     float epsilon,Pe;
@@ -20,6 +22,7 @@ private:
     int msg,ax,e,Gx,Ner, graph;
     vector <pair<float,int>> vec;
     vector <string> graph_names;
+    vector<pair<float,float>> expected;
 };
 
 #endif //CRC_CRC_H

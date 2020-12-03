@@ -94,6 +94,11 @@ int testParam(int C, char **V){
             return 3;
         }
     }
+    if(C==5){
+        if(!strcmp(V[1],"-i") && !strcmp(V[3],"-c")){
+            return 4;
+        }
+    }
   cout<<"unknown params, use -h"<<endl;
   exit(1);
 }

@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string.h>
+#include <cstring>
 #include <cmath>
 #include <stdlib.h>
 #include <vector>
@@ -11,6 +12,7 @@
 // #define main_debag true;
 //#define per_debag
 //#define err_debug
+//#define expected_debag
 #define pSTEP 1
 #define lSTEP 1
 #define MAX_MSG 1024

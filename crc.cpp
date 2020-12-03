@@ -124,3 +124,57 @@ void CRC::start(int mode, int C, char **V){
         }
     }
 }
+
+void CRC::loadingData(char *my, char *check){
+    ifstream fcheck1,fcheck2;
+    string s1,s2;
+    char *sep = " ";
+    char *c1,*c2;
+    fcheck1.open(my);
+    fcheck2.open(check);
+    if(!fcheck1 || !fcheck2){
+        cout<<"\nFiles not found"<<endl;
+        exit(1);
+    }
+    while(getline(fcheck1,s1)){
+        getline(fcheck2,s2);
+        c1 = strToChar(s1);
+        c2 = strToChar(s2);
+        c1 = strtok(c1,sep);
+        c1 = strtok(NULL,sep);
+        c2 = strtok(c2,sep);
+        c2 = strtok(NULL,sep);
+#ifdef expected_debag
+        cout<<stof(c1)<<" + "<<stof(c2)<<endl;
+#endif
+        expected.push_back({stof(c1),stof(c2)});
+    }
+    fcheck1.close();
+    fcheck2.close();
+}
+
+void CRC::expectedValue(char *my, char *check){
+    vector <float> exp;
+    float sum = 0 ;
+    float qsum = 0 ;
+    this->loadingData(my,check);
+    if(expected.size()==0){
+        cout<<"Error"<<endl;
+        exit(5);
+    }
+    for(int i = 0;i<expected.size();i++){
+        exp.push_back(abs(expected[i].first-expected[i].second));
+        sum+=exp[i];
+    }
+    sum/=exp.size();
+    cout<<"srednee arefm = "<<sum<<endl;
+    for(int i =0;i<exp.size();i++){
+        exp[i]= pow((exp[i]-sum),2);
+        qsum +=exp[i];
+    }
+    qsum/=exp.size();
+    cout<<"srednee qvadrat = "<<qsum<<endl;
+    qsum = sqrt(qsum);
+    cout<<"srednee qvadrat otclonenie = "<<qsum<<endl;
+}
+
