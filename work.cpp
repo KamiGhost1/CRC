@@ -19,7 +19,7 @@ int testParam(int C, char **V){
       cout<<"./e --start --only_once - calculate 1 length and 1 p"<<endl;
       cout<<"./e -i <path> -c <path> - calculate standard deviation"<<endl;
       cout<<"./e --words - all wolds"<<endl;
-      cout<<"./e --div - coder"<<endl;
+      cout<<"./e --div - test coder"<<endl;
       cout<<"./e --bin - binary"<<endl;
       cout<<"./e --test - random check"<<endl;
       cout<<"./e --msg - deg of msg"<<endl;
@@ -28,21 +28,21 @@ int testParam(int C, char **V){
       exit(0);
     }
     if(!strcmp(V[1],"--bin")){
-      cout<< "Enter num to test toBin func"<<endl;
+      cout<< "Enter num to test toBin func: ";
       int num;
       cin>>num;
-      char *bin = toBin(num,10);
-      cout<<bin<<endl;
+      char *bin = toBin(num);
+      cout<<"bin: "<<bin<<endl;
       num = toDec(bin);
-      cout<<num<<endl;
+      cout<<"Dec: "<<num<<endl;
       delete(bin);
       exit(0);
     }
     if(!strcmp(V[1],"--div")){
       int dividend,divisor;
-      cout<<"Enter dividend ";
+      cout<<"Enter dividend: ";
       cin>>dividend;
-      cout<<"Enter divisor ";
+      cout<<"Enter divisor: ";
       cin>>divisor;
       dividend*=pow(2,(deg(divisor)-1));
       int div = division(dividend,divisor);
@@ -59,11 +59,11 @@ int testParam(int C, char **V){
     }
     if(!strcmp(V[1],"--err")){
       int n,p,i;
-      cout<<"Enter n ";
+      cout<<"Enter n: ";
       cin>>n;
-      cout<<"Enter p ";
+      cout<<"Enter p: ";
       cin>>p;
-      cout<<"Enter i ";
+      cout<<"Enter i: ";
       cin>>i;
       srand(time(0));
       for(int j = 0;j<i;j++){
