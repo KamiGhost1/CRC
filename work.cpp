@@ -73,9 +73,10 @@ int testParam(int C, char **V){
     }
     if(!strcmp(V[1],"--msg")){
       int d;
-      cout<<"Enter deg: ";
+      cout<<"Enter number: ";
       cin>>d;
-      cout<<generateM(d)<<endl;
+      cout<<deg(d)<<endl;
+      exit(0);
     }
     if(!strcmp(V[1],"--start")){
         return 1;
