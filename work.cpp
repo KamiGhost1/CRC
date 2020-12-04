@@ -14,6 +14,7 @@ int testParam(int C, char **V){
       cout<<"./e --start --once - calculate 1 length"<<endl;
       cout<<"./e --start --once -m - calculate 1 length with new sheme"<<endl;
       cout<<"./e --start --only_once - calculate 1 length and 1 p"<<endl;
+      cout<<"./e -i <path> -c <path> - calculate standard deviation"<<endl;
       cout<<"./e --words - all wolds"<<endl;
       cout<<"./e --div - coder"<<endl;
       cout<<"./e --bin - binary"<<endl;
