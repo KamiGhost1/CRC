@@ -19,6 +19,19 @@ void CRC::write_graph() {
     f.close();
 }
 
+void CRC::opening() {
+    cout<<endl;
+    cout<<"\t__    __      ______ "<<endl;
+    cout<<"\t| |  / /   / /______\\ \\   | | \\  / | |   | |"<<endl;
+    cout<<"\t| | / /    | |      | |   | |\\ \\/ /| |   | |"<<endl;
+    cout<<"\t| |/ /     | |      | |   | |  --  | |   | |"<<endl;
+    cout<<"\t| |\\ \\     | |      | |   | |      | |   | |"<<endl;
+    cout<<"\t| | \\ \\    | |      | |   | |      | |   | |"<<endl;
+    cout<<"\t| |  \\ \\   | |______| \\   | |      | |   | |"<<endl;
+    cout<<"\t| |   \\ \\  \\ \\______| \\\\  | |      | |   | |"<<endl;
+    cout<<"\n\nK@mi soft\ngithub.com:kamighost1\n"<<endl;
+}
+
 void CRC::drawing() {
     FILE *gp = popen("gnuplot -persist","w");
     string cmd = "plot ";

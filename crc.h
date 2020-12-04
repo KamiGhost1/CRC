@@ -15,6 +15,7 @@ public:
     void write_graph();
     void expectedValue(char *my, char *check);
     void loadingData(char *my, char *check);
+    void opening();
 private:
     int p,n,nE,l;
     float epsilon,Pe;

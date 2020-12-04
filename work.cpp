@@ -1,10 +1,13 @@
 #include "work.hpp"
+#include "crc.h"
 
 
 int testParam(int C, char **V){
   if(C == 1){
-    cout<<"hello. its CRC modeling programm"<<endl;
-    exit(0);
+      CRC a;
+      a.opening();
+      cout<<"hello. its CRC modeling programm"<<endl;
+      exit(0);
   }
   if(C == 2){
     if(!strcmp(V[1],"-h")){
