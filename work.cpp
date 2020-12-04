@@ -8,7 +8,19 @@ int testParam(int C, char **V){
   }
   if(C == 2){
     if(!strcmp(V[1],"-h")){
-      cout<<"help"<<endl;
+      cout<<"\n\tCRC HELP\n"<<endl;
+      cout<<"./e --start - basic mode"<<endl;
+      cout<<"./e --start -m - basic mode with new sheme"<<endl;
+      cout<<"./e --start --once - calculate 1 length"<<endl;
+      cout<<"./e --start --once -m - calculate 1 length with new sheme"<<endl;
+      cout<<"./e --start --only_once - calculate 1 length and 1 p"<<endl;
+      cout<<"./e --words - all wolds"<<endl;
+      cout<<"./e --div - coder"<<endl;
+      cout<<"./e --bin - binary"<<endl;
+      cout<<"./e --test - random check"<<endl;
+      cout<<"./e --msg - deg of msg"<<endl;
+      cout<<"./e --err - generate err"<<endl;
+      cout<<""<<endl;
       exit(0);
     }
     if(!strcmp(V[1],"--bin")){
