@@ -17,11 +17,11 @@ public:
     void loadingData(char *my, char *check);
     void opening();
 private:
-    int p,n,nE,l;
+    unsigned int p,n,nE,l;
     float epsilon,Pe;
     string gx,name;
-    int msg,ax,e,Gx,Ner, graph;
-    vector <pair<float,int>> vec;
+    unsigned int msg,ax,e,Gx,Ner, graph;
+    vector <pair<float,unsigned int>> vec;
     vector <string> graph_names;
     vector<pair<float,float>> expected;
 };
