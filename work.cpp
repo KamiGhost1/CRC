@@ -71,6 +71,19 @@ int testParam(int C, char **V){
       }
       exit(0);
     }
+    if(!strcmp(V[1],"--div1")){
+        string gx,msg;
+        cout<<"Enter msg: ";
+        cin>>msg;
+        cout<<"Enter gx: ";
+        cin>>gx;
+        unsigned int Gx, Msg;
+        Gx = toDec(gx);
+        Msg = toDec(msg);
+        Msg = division(Msg, Gx);
+        cout<<"Result: "<<Msg<<endl;
+        exit(0);
+    }
     if(!strcmp(V[1],"--msg")){
       int d;
       cout<<"Enter number: ";
