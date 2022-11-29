@@ -7,7 +7,7 @@
 
 void CRC::write_graph() {
     ofstream f;
-    name = "graphs/graph";
+    name = "graphs/graphs";
     name+=(graph+'0');
     graph_names.push_back(name);
     cout<<name<<endl;
@@ -117,7 +117,7 @@ void CRC::start(int mode, int C, char **V){
 #ifdef per_debag
                 cout<<nE<<";"<<Pe<<";"<<p<<";"<<l<<endl;
 #endif
-                vec.push_back({Pe,p});
+                vec.push_back(make_pair(Pe, p));
                 nE = 0;
                 Ner = 0;
                 p+=pSTEP;
@@ -160,7 +160,7 @@ void CRC::loadingData(char *my, char *check){
 #ifdef expected_debag
         cout<<stof(c1)<<" + "<<stof(c2)<<endl;
 #endif
-        expected.push_back({stof(c1),stof(c2)});
+        expected.push_back(make_pair(stof(c1),stof(c2)));
     }
     fcheck1.close();
     fcheck2.close();

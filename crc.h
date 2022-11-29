@@ -21,9 +21,9 @@ private:
     float epsilon,Pe;
     string gx,name;
     unsigned int msg,ax,e,Gx,Ner, graph;
-    vector <pair<float,unsigned int>> vec;
+    vector <pair<float,unsigned int> > vec;
     vector <string> graph_names;
-    vector<pair<float,float>> expected;
+    vector<pair<float,float> > expected;
 };
 
 #endif //CRC_CRC_H
